@@ -10,7 +10,6 @@ async function bootstrap() {
     .setTitle('Autenticacion')
     .setDescription('esta api es para ejercer conocimientos de como manejar nestjs')
     .setVersion('1.0')
-    .addTag('user')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

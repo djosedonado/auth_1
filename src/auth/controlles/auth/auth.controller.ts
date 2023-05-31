@@ -30,6 +30,7 @@ export class AuthController {
 
   // Pruebas de Modelo
   @UseGuards(AuthGuard)//tenecr cuidado al momento de usar este metodo ya que tiene que importar el guards que creoo
+  @Get('Get')
   getProfile(@Request() req) {
     return req.user;
   }
