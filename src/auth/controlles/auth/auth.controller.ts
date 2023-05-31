@@ -8,9 +8,10 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/services/auth/auth.service';
 import { AuthGuard } from 'src/guards/auth/auth.guard';
+import { UserDto } from 'src/user/dto/userDto.dto';
 
 @ApiBearerAuth()
 @ApiTags('Auth')
@@ -22,9 +23,10 @@ export class AuthController {
   //Metodo de Autenticacion de usuarios
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  @ApiOperation({ summary: 'Create cat' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  signIn(@Body() signInDto: Record<string, any>) {
+  @ApiOperation({ summary: 'User login' })
+  @ApiOkResponse({ type: UserDto })
+  @ApiBadRequestResponse({ description: 'Invalid credentials' })
+  signIn(@Body() signInDto: UserDto) {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
 
